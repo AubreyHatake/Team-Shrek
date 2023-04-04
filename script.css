@@ -13,7 +13,7 @@ h1 {
     
 }
 
-textarea {
+.textarea {
     height: 80%;
     width: 20%;
     background-color: whitesmoke;
@@ -31,3 +31,4 @@ button {
     border-color: rgb(245, 216, 231);
 
 }
+
