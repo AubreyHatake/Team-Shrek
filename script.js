@@ -4,3 +4,7 @@ button.addEventListener('click', function() {
     });
 // Path: index.html
 <button id="button">Click me</button>
+
+$( function() {
+    $( "#datepicker" ).datepicker();
+  } );
