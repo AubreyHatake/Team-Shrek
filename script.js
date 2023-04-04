@@ -5,14 +5,33 @@
 // Path: index.html
 /* <button id="button">Click me</button> */
 
-var btn = document.querySelector('#search-artist');
+// Variables 
+var weatherApiKey = "855fad25288edda6cdf233e97e030127";
+var artistBtn = document.querySelector('#search-artist');
+var cityBtn = document.querySelector('#search-city');
 
 
-function x () {
-    console.log("you clicked a button!")
+
+// this function is to get and display current weather conditions.
+var getCurrentConditions = (city) => {
+    var weatherURL ="https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + weatherApiKey;
+    fetch(weatherURL)
+    .then((response) => {
+    console.log(response);
+    return response.json();
+})
+.then(data => {
+    console.log("CURR DAY: ", data);
+
+})
+    
 };
-
-btn.addEventListener("click", x);
+// This is the search city button.
+cityBtn.addEventListener("click", function () {
+    // Obtain city name from the search box
+    var city = $('#city-input').val();
+    getCurrentConditions(city);
+});
 
 $( function() {
     $( "#datepicker" ).datepicker();
