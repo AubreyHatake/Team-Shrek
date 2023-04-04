@@ -61,3 +61,10 @@ p {
     font-family: 'cambria';
     font-weight: bold;
 }
+
+.city-weather {
+    border-style: solid;
+    border-radius: 20%;
+    font-family: 'Cambria';
+    
+}

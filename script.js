@@ -21,6 +21,8 @@ var getCurrentConditions = (city) => {
     return response.json();
 })
 .then(data => {
+    var ul = $('#city-results'); 
+    
     console.log("CURR DAY: ", data);
 
 })
