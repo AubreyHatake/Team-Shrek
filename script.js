@@ -7,7 +7,7 @@
 
 // Variables 
 var weatherApiKey = "855fad25288edda6cdf233e97e030127";
-var artistBtn = document.querySelector('#search-artist');
+var trailBtn = document.querySelector('#search-trail');
 var cityBtn = document.querySelector('#search-city');
 
 
@@ -22,7 +22,7 @@ var getCurrentConditions = (city) => {
 })
 .then(data => {
     var ul = $('#city-results'); 
-    
+
     console.log("CURR DAY: ", data);
 
 })
