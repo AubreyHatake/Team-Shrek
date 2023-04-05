@@ -7,6 +7,7 @@ var nationalParkApiKey ="wyMlD52aDKYO8sIZ8Ix3x8MlocAQp0VtIGjyGluu";
 var nationalParkSearchEl = $("#NPSearch");
 var inputStateIdEl = $("#stateIdInput").val();
 var NPListEl = $("#NPList");
+var NPInfo = [];
 
 $("#stateIdInput").keypress(function(event) 
 {
@@ -28,9 +29,11 @@ var getNationalPark = function(inputStateIdEl)
     {
         console.log(response.data);
         for(var i = 0; i < response.data.length; i++ ){
-        var NPInfo = response.data[i].fullName;
+        
+            NPInfo.push(response.data[i].fullName);
         console.log(NPInfo);
-        NPListEl.text("List Of the National Parks " + NPInfo );
+        NPListEl.append("<li>" + NPInfo[i] + "</li>");
+       
         }
     });
 }    
