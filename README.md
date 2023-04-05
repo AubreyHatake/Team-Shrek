@@ -1,6 +1,6 @@
 # Team-Shrek
 DEPLOYED SITE LINK WILL GO HERE: 
-For this site the user is able to view the weather conditions for the hiking trail that they are planing on going on.  
+For this site the user is able to view the weather conditions for the national parks that they are planing on going on.  
 
 ## User Story 
 As an avid hiker, I want to use an application that tracks hiking trails and weather so that I can plan and prepare for my hikes more efficiently.
