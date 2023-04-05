@@ -48,6 +48,3 @@ cityBtn.addEventListener("click", function () {
     getCurrentConditions(city);
 });
 
-$( function() {
-    $( "#datepicker" ).datepicker();
-  } );
