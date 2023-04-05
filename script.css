@@ -63,8 +63,10 @@ p {
 }
 
 .city-weather {
-    border-style: solid;
-    border-radius: 20%;
+    float: center;
+    width: 40%;
+    height: 30%;
     font-family: 'Cambria';
-    
+    background-color: rgb(203, 221, 204);
+    color:rgb(66, 39, 57);
 }
