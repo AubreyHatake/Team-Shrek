@@ -1,5 +1,7 @@
 // Variables 
 var weatherApiKey = "855fad25288edda6cdf233e97e030127";
+var latitude = 0;
+var longitude = 0;
 var currentWeather = document.querySelector('#current-weather');
 
 //variables for national park
@@ -34,14 +36,13 @@ var getNationalPark = function(inputStateIdEl)
     {
         console.log(response.data);
 
-        // getCurrentConditions(data.latitude.longitude);
         NPListEl.empty();
         NPInfo = [];
-
+        
         for(var i = 0; i < response.data.length; i++ )
         {
-
-
+            
+      
         for(var i = 0; i < response.data.length; i++ ){
         
             NPInfo.push(response.data[i].fullName);
@@ -51,7 +52,7 @@ var getNationalPark = function(inputStateIdEl)
 
            NPListEl.append(NPDataListEl);
         }
-    });
+ } });
 }    
 
 nationalParkSearchEl.on("click",function (event) {
@@ -105,12 +106,16 @@ NPListEl.on("click","NPList", function (event)
         NPInfoConatinerEl.empty();
         for(var i = 0; i < response.data.length; i++ )
         {
+
+            latitude = response.data.latitude;
+            longitude = response.data.longitude; 
+            getCurrentConditions(latitude, longitude);   
             var card = $("<div>").addClass("card col-12 col-md-2 ");
             var cardBody = $("<div>").addClass("card-body p-3 NPBody");
             var NPName = $("<h4>").addClass("card-title").text(response.data.fullName);
             var NPDescription = $("<p>").addClass("card-text Description").text("Description : " + response.data.description + "°F");
             var NPActivities = $("<p>").addClass("card-text Activities").text("Activities : " + response.data.activities);
-        
+            
             cardBody.append(NPName, NPDescription, NPActivities);
             card.append(cardBody);
             NPInfoConatinerEl.append(card);
@@ -120,18 +125,6 @@ NPListEl.on("click","NPList", function (event)
 });
 
 
-// this function is to get current weather conditions.
-// var getCurrentConditions = (state) => {
-//     var weatherURL ="https://api.openweathermap.org/data/2.5/weather?q=" + state + "&units=imperial" + "&appid=" + weatherApiKey;
-//     fetch(weatherURL)
-//     .then((response) => {
-//     console.log(response);
-//     return response.json();
-// })
-// .then(data => {
-//      console.log("CURR DAY: ", data);
-//      displayCurrentConditions(data);
-// })
 
 
 
