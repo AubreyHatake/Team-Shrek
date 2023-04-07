@@ -66,6 +66,21 @@ nationalParkSearchEl.on("click",function (event) {
     }
 });
 
+
+// get history from local storage if any
+// searchEl.addEventListener("click", function () {
+//     const searchTerm = cityEl.value;
+//     getWeather(searchTerm);
+//     searchHistory.push(searchTerm);
+//     localStorage.setItem("search", JSON.stringify(searchHistory));
+//     renderSearchHistory();
+// });
+
+
+
+
+
+
 NPListEl.on("click","NPList", function (event)
 {
     event.preventDefault();
