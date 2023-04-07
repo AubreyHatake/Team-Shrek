@@ -28,6 +28,8 @@ var getNationalPark = function(inputStateIdEl)
     }).then(function(response)
     {
         console.log(response.data);
+        NPListEl.empty();
+        NPInfo = [];
         for(var i = 0; i < response.data.length; i++ ){
         
             NPInfo.push(response.data[i].fullName);
