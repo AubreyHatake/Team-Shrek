@@ -31,12 +31,19 @@ var getNationalPark = function(inputStateIdEl)
     }).then(function(response)
     {
         console.log(response.data);
+
+        // getCurrentConditions(data.latitude.longitude);
+        NPListEl.empty();
+        NPInfo = [];
+
         for(var i = 0; i < response.data.length; i++ ){
         
             NPInfo.push(response.data[i].fullName);
         console.log(NPInfo);
-        NPListEl.append("<li>" + NPInfo[i] + "</li>");
-       
+       // NPListEl.append("<li>" + NPInfo[i] + "</li>");
+      var  NPDataListEl  = $("<button>").attr("type","button").attr("class","NPList").text(NPInfo[i]);
+
+           NPListEl.append(NPDataListEl);
         }
     });
 }    
@@ -56,25 +63,28 @@ nationalParkSearchEl.on("click",function (event) {
         getNationalPark(inputStateIdEl);
         
         $("#stateIdInput").val("");
-         
     }
+});
+
+NPListEl.on("click","NPList", function (event)
+{
+    event.preventDefault();
+
 });
 
 
 
-
-// this function is to get current weather conditions.
-// var getCurrentConditions = (state) => {
-//     var weatherURL ="https://api.openweathermap.org/data/2.5/weather?q=" + state + "&units=imperial" + "&appid=" + weatherApiKey;
-//     fetch(weatherURL)
-//     .then((response) => {
-//     console.log(response);
-//     return response.json();
-// })
-// .then(data => {
-//      console.log("CURR DAY: ", data);
-//      displayCurrentConditions(data);
-// })
+var getCurrentConditions = (latitude, longitude) => {
+    var weatherURL = "https://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&appid=" + weatherApiKey
+    fetch(weatherURL)
+    .then((response) => {
+    console.log(response);
+    return response.json();
+})
+.then(data => {
+     console.log("CURR DAY: ", data);
+    //  displayCurrentConditions(data);
+})}
     
 // };
 // this function is to display the city name, temp, and an icon. the function is getting called on line 26, so that I can use the data from the getcurrentconditions function.
