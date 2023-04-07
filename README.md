@@ -12,6 +12,11 @@ I also want the application to display up-to-date weather forecasts for each par
 
 
 ## Acceptance criteria 
+The application must have a search function that allows users to find national parks by state.
 
+The application must provide detailed information about each national park's activites.
 
+The application must display up-to-date weather forecasts for each national park, including temperature, wind speed, precipitation, and any other relevant weather conditions.
+
+The weather information displayed in the application must be accurate and reliable, sourced from a trusted weather service provider.
 
