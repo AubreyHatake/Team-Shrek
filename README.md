@@ -3,13 +3,12 @@ DEPLOYED SITE LINK WILL GO HERE:
 For this site the user is able to view the weather conditions for the national parks that they are planing on going on.  
 
 ## User Story 
-As an avid hiker, I want to use an application that tracks hiking trails and weather so that I can plan and prepare for my hikes more efficiently.
+As a nature enthusiast, I want to use an application that allows me to track the locations and weather conditions of national parks, so that I can plan my trips and enjoy the outdoors to the fullest.
 
-When I view the details of a hike, I want to see the current weather forecast for the day of the hike.
+When I open the application, I should be able to search for national parks by state. Once I select a park, the application should provide me with detailed information about the park's activities. 
 
-This should include information about temperature, precipitation, and wind conditions so that I can dress appropriately and plan for any potential weather-related issues.
-
-Overall, I want an app that combines the convenience of concert tracking with the practicality of weather forecasting, so that I can enjoy my hiking experience to the fullest.
+I also want the application to display up-to-date weather forecasts for each park, so that I can plan my activities accordingly. The weather information should include temperature, wind speed, precipitation,
+ and any other relevant weather conditions that could affect my trip.
 
 
 ## Acceptance criteria 
