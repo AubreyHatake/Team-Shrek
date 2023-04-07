@@ -5,8 +5,8 @@ var currentWeather = document.querySelector('#current-weather');
 
 
 // this function is to get current weather conditions.
-// var getCurrentConditions = (city) => {
-//     var weatherURL ="https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial" + "&appid=" + weatherApiKey;
+// var getCurrentConditions = (state) => {
+//     var weatherURL ="https://api.openweathermap.org/data/2.5/weather?q=" + state + "&units=imperial" + "&appid=" + weatherApiKey;
 //     fetch(weatherURL)
 //     .then((response) => {
 //     console.log(response);
