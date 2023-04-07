@@ -63,3 +63,12 @@ p {
     font-family: 'cambria';
     font-weight: bold;
 }
+
+.city-weather {
+    float: center;
+    width: 40%;
+    height: 30%;
+    font-family: 'Cambria';
+    background-color: rgb(203, 221, 204);
+    color:rgb(66, 39, 57);
+}
