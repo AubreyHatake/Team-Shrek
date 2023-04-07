@@ -34,8 +34,10 @@ var getNationalPark = function(inputStateIdEl)
         
             NPInfo.push(response.data[i].fullName);
         console.log(NPInfo);
-        NPListEl.append("<li>" + NPInfo[i] + "</li>");
-       
+       // NPListEl.append("<li>" + NPInfo[i] + "</li>");
+      var  NPDataListEl  = $("<button>").attr("type","button").attr("class","NPList").text(NPInfo[i]);
+
+           NPListEl.append(NPDataListEl);
         }
     });
 }    
@@ -57,7 +59,11 @@ nationalParkSearchEl.on("click",function (event) {
     }
 });
 
+NPListEl.on("click","NPList", function (event)
+{
+    event.preventDefault();
 
+});
 
 
 // this function is to get current weather conditions.
