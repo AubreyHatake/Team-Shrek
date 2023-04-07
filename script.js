@@ -28,13 +28,19 @@ var getNationalPark = function(inputStateIdEl)
     }).then(function(response)
     {
         console.log(response.data);
+
         // getCurrentConditions(data.latitude.longitude);
+        NPListEl.empty();
+        NPInfo = [];
+
         for(var i = 0; i < response.data.length; i++ ){
         
             NPInfo.push(response.data[i].fullName);
         console.log(NPInfo);
-        NPListEl.append("<li>" + NPInfo[i] + "</li>");
-       
+       // NPListEl.append("<li>" + NPInfo[i] + "</li>");
+      var  NPDataListEl  = $("<button>").attr("type","button").attr("class","NPList").text(NPInfo[i]);
+
+           NPListEl.append(NPDataListEl);
         }
     });
 }    
@@ -55,7 +61,11 @@ nationalParkSearchEl.on("click",function (event) {
     }
 });
 
+NPListEl.on("click","NPList", function (event)
+{
+    event.preventDefault();
 
+});
 
 
 
