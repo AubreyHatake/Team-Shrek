@@ -8,6 +8,9 @@ var nationalParkSearchEl = $("#NPSearch");
 var inputStateIdEl = $("#stateIdInput").val();
 var NPListEl = $("#NPList");
 var NPInfo = [];
+var NPList = document.querySelector('#NPList');
+var inputStateId = document.querySelector('#stateIdInput');
+
 
 $("#stateIdInput").keypress(function(event) 
 {
@@ -49,6 +52,8 @@ nationalParkSearchEl.on("click",function (event) {
     
     event.preventDefault();
     var inputStateIdEl =$("#stateIdInput").val();
+    localStorage.setItem("stateIdInput", inputStateIdEl);
+    localStorage.getItem("stateIdInput");
     if(inputStateIdEl === "")
     {
         alert("Please Enter valid statecode to display national parks");
@@ -60,6 +65,21 @@ nationalParkSearchEl.on("click",function (event) {
         $("#stateIdInput").val("");
     }
 });
+
+
+// get history from local storage if any
+// searchEl.addEventListener("click", function () {
+//     const searchTerm = cityEl.value;
+//     getWeather(searchTerm);
+//     searchHistory.push(searchTerm);
+//     localStorage.setItem("search", JSON.stringify(searchHistory));
+//     renderSearchHistory();
+// });
+
+
+
+
+
 
 NPListEl.on("click","NPList", function (event)
 {
