@@ -55,8 +55,10 @@ p {
 
 #datepicker {
     font-size: 16px;
-     border-radius: auto;
+    margin:;
+    border-radius: auto;
     border-width: auto;
+    display: block;
     padding: 10px;
     font-family: 'cambria';
     font-weight: bold;
