@@ -26,9 +26,9 @@ button {
     width: 20%;
     font-family: 'cambria';
     font-weight: bold;
-    color: rgb(66, 39, 57);
-    background-color: rgb(247, 177, 234);
-    border-color: rgb(245, 216, 231);
+    color: rgb(250, 246, 249);
+    background-color: rgb(63, 87, 68);
+    border-color: rgb(106, 144, 117);
     padding: 10px;
     margin: 10px;
     border-radius: 10px;
@@ -72,3 +72,14 @@ p {
     background-color: rgb(203, 221, 204);
     color:rgb(66, 39, 57);
 }
+
+.swamp {
+    height: 300px;
+    width: 100%;
+    background-image: url("swamp.jpg");
+    margin-top: 80px;
+    background-size: cover;
+    background-position: center;
+   
+}
+
