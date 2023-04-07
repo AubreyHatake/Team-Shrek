@@ -2,6 +2,60 @@
 var weatherApiKey = "855fad25288edda6cdf233e97e030127";
 var currentWeather = document.querySelector('#current-weather');
 
+//variables for national park
+var nationalParkApiKey ="wyMlD52aDKYO8sIZ8Ix3x8MlocAQp0VtIGjyGluu";
+var nationalParkSearchEl = $("#NPSearch");
+var inputStateIdEl = $("#stateIdInput").val();
+var NPListEl = $("#NPList");
+var NPInfo = [];
+
+$("#stateIdInput").keypress(function(event) 
+{
+    if(event.keyCode === 13)
+    {
+        event.preventDefault();
+        $("#NPSearch").click();
+    }
+});
+
+var getNationalPark = function(inputStateIdEl)
+{
+    
+    const requestUrl = "https://developer.nps.gov/api/v1/parks?stateCode=" + inputStateIdEl + "&api_key=" + nationalParkApiKey;
+    $.ajax({
+        url: requestUrl,
+        method: 'GET',
+    }).then(function(response)
+    {
+        console.log(response.data);
+        for(var i = 0; i < response.data.length; i++ ){
+        
+            NPInfo.push(response.data[i].fullName);
+        console.log(NPInfo);
+        NPListEl.append("<li>" + NPInfo[i] + "</li>");
+       
+        }
+    });
+}    
+
+nationalParkSearchEl.on("click",function (event) {
+    
+    event.preventDefault();
+    var inputStateIdEl =$("#stateIdInput").val();
+    if(inputStateIdEl === "")
+    {
+        alert("Please Enter valid statecode to display national parks");
+    }
+    else {
+        
+        getNationalPark(inputStateIdEl);
+        
+        $("#stateIdInput").val("");
+         
+    }
+});
+
+
 
 
 // this function is to get current weather conditions.
