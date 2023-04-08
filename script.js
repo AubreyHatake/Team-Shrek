@@ -1,5 +1,7 @@
 // Variables 
 var weatherApiKey = "855fad25288edda6cdf233e97e030127";
+var latitude = 0;
+var longitude = 0;
 var currentWeather = document.querySelector('#current-weather');
 
 //variables for national park
@@ -37,9 +39,9 @@ var getNationalPark = function(inputStateIdEl)
     {
         console.log(response.data);
 
-        // getCurrentConditions(data.latitude.longitude);
         NPListEl.empty();
         NPInfo = [];
+        
         for(var i = 0; i < response.data.length; i++ )
         {
         
@@ -105,7 +107,9 @@ function parkSelection (event)
         {
             console.log(response.data);
             NPInfoConatinerEl.empty();
-
+            latitude = response.data.latitude;
+            longitude = response.data.longitude; 
+            getCurrentConditions(latitude, longitude); 
             for(var i = 0; i < response.data.length; i++ )
             {
                 if(response.data[i].fullName === parkName)
@@ -138,6 +142,25 @@ function parkSelection (event)
 //      console.log("CURR DAY: ", data);
 //      displayCurrentConditions(data);
 // })
+  //var getNPInfo = function()
+    //{
+    
+
+
+
+
+var getCurrentConditions = (latitude, longitude) => {
+    var weatherURL = "https://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&appid=" + weatherApiKey
+    fetch(weatherURL)
+    .then((response) => {
+    console.log(response);
+    return response.json();
+})
+.then(data => {
+     console.log("CURR DAY: ", data);
+    //  displayCurrentConditions(data);
+})}
+
     
 // };
 // this function is to display the city name, temp, and an icon. the function is getting called on line 26, so that I can use the data from the getcurrentconditions function.
