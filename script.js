@@ -14,7 +14,10 @@ var NPList = document.querySelector('#NPList');
 var inputStateId = document.querySelector('#stateIdInput');
 
 
-var NPInfoConatinerEl = $("<div>").attr("id","#NPInfoContainer");
+var NPInfoConatinerEl = $("<div>").attr("id","NPInfoContainer");
+var parkInfoContainer = $("#infoContainer");
+parkInfoContainer.append(NPInfoConatinerEl);
+
 
 $("#stateIdInput").keypress(function(event) 
 {
@@ -41,18 +44,16 @@ var getNationalPark = function(inputStateIdEl)
         
         for(var i = 0; i < response.data.length; i++ )
         {
-        
-      
-        for(var i = 0; i < response.data.length; i++ ){
-        
+
             NPInfo.push(response.data[i].fullName);
             console.log(NPInfo);
           // NPListEl.append("<li>" + NPInfo[i] + "</li>");
-            var NPDataListEl  = $("<button>").attr("type","button").attr("class","NPList").text(NPInfo[i]);
-
-           NPListEl.append(NPDataListEl);
+            var NPDataListEl  = $("<button>").attr("type","button").attr("class","NPList").text(NPInfo[i]).val(inputStateIdEl);
+             NPListEl.append(NPDataListEl);
+             NPDataListEl.on("click",parkSelection);
         }
- } });
+    });
+    
 }    
 
 nationalParkSearchEl.on("click",function (event) {
@@ -71,6 +72,7 @@ nationalParkSearchEl.on("click",function (event) {
         
         $("#stateIdInput").val("");
     }
+
 });
 
 
@@ -86,44 +88,63 @@ nationalParkSearchEl.on("click",function (event) {
 
 
 
-
-
-NPListEl.on("click","NPList", function (event)
+function parkSelection (event)
 {
     event.preventDefault();
-    // getNPInfo();
-    //});
+    console.log(event.target.value);
+    console.log(event.target.textContent);
+    var stateId = event.target.value;
+    var parkName = event.target.textContent;
 
-  //var getNPInfo = function()
-    //{
-    const requestUrl = "https://developer.nps.gov/api/v1/parks?stateCode=" + inputStateIdEl + "&api_key=" + nationalParkApiKey;
-    $.ajax({
-        url: requestUrl,
-        method: 'GET',
-    }).then(function(response)
-    {
-        console.log(response.data);
-        NPInfoConatinerEl.empty();
-        for(var i = 0; i < response.data.length; i++ )
+    var storeNPList = JSON.parse(localStorage.getItem("National-Park-List")) || [];
+    storeNPList.push(parkName);
+    localStorage.setItem("National-Park-List", JSON.stringify(storeNPList));
+        const requestUrl = "https://developer.nps.gov/api/v1/parks?stateCode=" + stateId + "&api_key=" + nationalParkApiKey;
+        $.ajax({
+            url: requestUrl,
+            method: 'GET',
+        }).then(function(response)
         {
-
+            console.log(response.data);
+            NPInfoConatinerEl.empty();
             latitude = response.data.latitude;
             longitude = response.data.longitude; 
-            getCurrentConditions(latitude, longitude);   
-            var card = $("<div>").addClass("card col-12 col-md-2 ");
-            var cardBody = $("<div>").addClass("card-body p-3 NPBody");
-            var NPName = $("<h4>").addClass("card-title").text(response.data.fullName);
-            var NPDescription = $("<p>").addClass("card-text Description").text("Description : " + response.data.description + "°F");
-            var NPActivities = $("<p>").addClass("card-text Activities").text("Activities : " + response.data.activities);
-            
-            cardBody.append(NPName, NPDescription, NPActivities);
-            card.append(cardBody);
-            NPInfoConatinerEl.append(card);
-        }
-            
-    });
-});
+            getCurrentConditions(latitude, longitude); 
+            for(var i = 0; i < response.data.length; i++ )
+            {
+                if(response.data[i].fullName === parkName)
+                {
+                    var card = $("<div>").addClass("card col-12 col-md-2 ");
+                    var cardBody = $("<div>").addClass("card-body p-3 NPBody");
+                    var NPName = $("<h4>").addClass("card-title").text(response.data[i].fullName);
+                    var NPDescription = $("<p>").addClass("card-text Description").text("Description : " + response.data[i].description );
+                    var NPActivities = $("<p>").addClass("card-text Activities").text("Activities : " + response.data[i].activities[i].name);
+                    
+                    cardBody.append(NPName, NPDescription, NPActivities);
+                    card.append(cardBody);
+                     NPInfoConatinerEl.append(card);
+                }
+            }
+        });
+     
+}
 
+
+// this function is to get current weather conditions.
+// var getCurrentConditions = (state) => {
+//     var weatherURL ="https://api.openweathermap.org/data/2.5/weather?q=" + state + "&units=imperial" + "&appid=" + weatherApiKey;
+//     fetch(weatherURL)
+//     .then((response) => {
+//     console.log(response);
+//     return response.json();
+// })
+// .then(data => {
+//      console.log("CURR DAY: ", data);
+//      displayCurrentConditions(data);
+// })
+  //var getNPInfo = function()
+    //{
+    
 
 
 
