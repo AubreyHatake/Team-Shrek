@@ -89,6 +89,7 @@ nationalParkSearchEl.on("click",function (event) {
 // });
 
 
+
 function parkSelection (event)
 {
     event.preventDefault();
