@@ -47,10 +47,12 @@ var getNationalPark = function(inputStateIdEl)
         
             NPInfo.push(response.data[i].fullName);
             console.log(NPInfo);
-          // NPListEl.append("<li>" + NPInfo[i] + "</li>");
+            let npListLiEl = $("<li>").attr("class","NPList").attr("id", "listOfNp");
+            NPListEl.append(npListLiEl);
             var NPDataListEl  = $("<button>").attr("type","button").attr("class","NPList").text(NPInfo[i]).val(inputStateIdEl);
-             NPListEl.append(NPDataListEl);
-             NPDataListEl.on("click",parkSelection);
+            NPDataListEl.on("click",parkSelection);
+            npListLiEl.append(NPDataListEl);
+            
         }
     });
     
@@ -61,8 +63,7 @@ nationalParkSearchEl.on("click",function (event) {
     event.preventDefault();
     var inputStateIdEl =$("#stateIdInput").val();
     localStorage.setItem("stateIdInput", inputStateIdEl);
-    localStorage.getItem("stateIdInput");
-    if(inputStateIdEl === "")
+    if(inputStateIdEl === "" || inputStateIdEl === undefined)
     {
         alert("Please Enter valid statecode to display national parks");
     }
@@ -86,13 +87,9 @@ nationalParkSearchEl.on("click",function (event) {
 // });
 
 
-
-
 function parkSelection (event)
 {
     event.preventDefault();
-    console.log(event.target.value);
-    console.log(event.target.textContent);
     var stateId = event.target.value;
     var parkName = event.target.textContent;
 
@@ -107,22 +104,48 @@ function parkSelection (event)
         {
             console.log(response.data);
             NPInfoConatinerEl.empty();
-            latitude = response.data.latitude;
-            longitude = response.data.longitude; 
-            getCurrentConditions(latitude, longitude); 
+            
             for(var i = 0; i < response.data.length; i++ )
             {
                 if(response.data[i].fullName === parkName)
                 {
+
                     var card = $("<div>").addClass("card col-12 col-md-2 ");
                     var cardBody = $("<div>").addClass("card-body p-3 NPBody");
-                    var NPName = $("<h4>").addClass("card-title").text(response.data[i].fullName);
-                    var NPDescription = $("<p>").addClass("card-text Description").text("Description : " + response.data[i].description );
-                    var NPActivities = $("<p>").addClass("card-text Activities").text("Activities : " + response.data[i].activities[i].name);
-                    
-                    cardBody.append(NPName, NPDescription, NPActivities);
                     card.append(cardBody);
+                    var npName = $("<h4>").addClass("card-title").text(response.data[i].fullName);
+                    cardBody.append(npName);
+                    //var npDescription = $("<p>").addClass("card-text Description").text("Description : " + response.data[i].description );
+                    var npDescriptionTitle = $("<h2>").addClass("card-text DescriptionTitle").text("Description : ");
+                    cardBody.append(npDescriptionTitle);
+                    npDescription = $("<p>").addClass("card-text DescriptionPara").text(response.data[i].description);
+                    cardBody.append(npDescription);
+
+                    var npActivities = $("<p>").addClass("card-text Activities").text("Activities : ");
+                    cardBody.append(npActivities);
+
+                    /*for(var j = 0; j < response.data[i].activities.length; j++ )
+                    {
+                        var npActivitiesListEl = $("<p>").attr("id", "listOfActivities").text(response.data[i].activities[j].name);
+                        npActivities.append(npActivitiesListEl);
+                    }*/
+                    
+                    var npActivitiesListUL = $("<ul>").addClass("card-text");
+                    npActivities.append(npActivitiesListUL);
+                    
+                    for(var j = 0; j < response.data[i].activities.length; j++ )
+                    {
+                        let npActivitiesLiEl = $("<li>").attr("id", "listOfActivities").text(response.data[i].activities[j].name);
+                        npActivitiesListUL.append(npActivitiesLiEl);
+                    }
+                    
+                    latitude = response.data[i].latitude;
+                    longitude = response.data[i].longitude;
+                    getCurrentConditions(latitude, longitude);
+                    
                      NPInfoConatinerEl.append(card);
+
+
                 }
             }
         });
@@ -157,8 +180,7 @@ var getCurrentConditions = (latitude, longitude) => {
     return response.json();
 })
 .then(data => {
-     console.log("CURR DAY: ", data);
-    //  displayCurrentConditions(data);
+     return data;
 })}
 
     
