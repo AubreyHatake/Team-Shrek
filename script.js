@@ -41,7 +41,7 @@ var getNationalPark = function(inputStateIdEl)
         
         for(var i = 0; i < response.data.length; i++ )
         {
-            
+        
       
         for(var i = 0; i < response.data.length; i++ ){
         
