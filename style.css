@@ -85,6 +85,7 @@ p {
 #list-container {
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
 }
 
 .li-element {
