@@ -7,9 +7,12 @@ var nationalParkApiKey ="wyMlD52aDKYO8sIZ8Ix3x8MlocAQp0VtIGjyGluu";
 var nationalParkSearchEl = $("#NPSearch");
 var inputStateIdEl = $("#stateIdInput").val();
 var NPListEl = $("#NPList");
+var btnListEl = $("#btnList");
 var NPInfo = [];
 var NPList = document.querySelector('#NPList');
 var inputStateId = document.querySelector('#stateIdInput');
+
+displayNpList()
 
 
 $("#stateIdInput").keypress(function(event) 
@@ -48,23 +51,66 @@ var getNationalPark = function(inputStateIdEl)
     });
 }    
 
+
+var stateIdArray = [];
+
+
+
 nationalParkSearchEl.on("click",function (event) {
     
-    event.preventDefault();
-    var inputStateIdEl =$("#stateIdInput").val();
-    localStorage.setItem("stateIdInput", inputStateIdEl);
-    localStorage.getItem("stateIdInput");
-    if(inputStateIdEl === "")
-    {
-        alert("Please Enter valid statecode to display national parks");
-    }
-    else {
-        
-        getNationalPark(inputStateIdEl);
-        
-        $("#stateIdInput").val("");
-    }
+    event.preventDefault(); 
+    var inputStateIdEl =$("#stateIdInput").val(); 
+    stateIdArray.push(inputStateIdEl); 
+    console.log(stateIdArray);
+    localStorage.setItem("stateIdInput", JSON.stringify(stateIdArray));
+
+
+    
 });
+
+function displayNpList() {
+    var npList = JSON.parse(localStorage.getItem("stateIdInput")) || []
+    for (let index = 0; index < npList.length; index++) {
+        const element = npList[index];
+        console.log(element) 
+        var li= $("<li>") 
+        li.attr("class","li-element")
+        li.text(element)
+        li.click(npListButton)
+        btnListEl.append(li)
+    }
+
+
+
+}
+
+
+function npListButton() {
+    var  element= $(this).text();
+    console.log(element);  
+    getNationalPark(element);
+}
+
+
+
+
+// localStorage.getItem("stateIdInput");
+    // if(inputStateIdEl === "")
+    // {
+    //     alert("Please Enter valid statecode to display national parks");
+    // }
+    // else {
+        
+    //     getNationalPark(inputStateIdEl);
+        
+    //     $("#stateIdInput").val("");
+    // }
+
+
+
+
+
+
 
 
 // get history from local storage if any
