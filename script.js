@@ -44,7 +44,7 @@ var getNationalPark = function(inputStateIdEl)
         
         for(var i = 0; i < response.data.length; i++ )
         {
-        
+
             NPInfo.push(response.data[i].fullName);
             console.log(NPInfo);
           // NPListEl.append("<li>" + NPInfo[i] + "</li>");
