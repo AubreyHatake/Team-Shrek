@@ -24,6 +24,7 @@ $("#stateIdInput").keypress(function(event)
     if(event.keyCode === 13)
     {
         event.preventDefault();
+        
         $("#NPSearch").click();
     }
 });
@@ -61,6 +62,7 @@ var getNationalPark = function(inputStateIdEl)
 nationalParkSearchEl.on("click",function (event) {
     
     event.preventDefault();
+    NPInfoConatinerEl.empty();
     var inputStateIdEl =$("#stateIdInput").val();
     localStorage.setItem("stateIdInput", inputStateIdEl);
     if(inputStateIdEl === "" || inputStateIdEl === undefined)
@@ -90,6 +92,7 @@ nationalParkSearchEl.on("click",function (event) {
 function parkSelection (event)
 {
     event.preventDefault();
+    
     var stateId = event.target.value;
     var parkName = event.target.textContent;
 
@@ -113,35 +116,44 @@ function parkSelection (event)
                     var card = $("<div>").addClass("card col-12 col-md-2 ");
                     var cardBody = $("<div>").addClass("card-body p-3 NPBody");
                     card.append(cardBody);
-                    var npName = $("<h4>").addClass("card-title").text(response.data[i].fullName);
-                    cardBody.append(npName);
-                    //var npDescription = $("<p>").addClass("card-text Description").text("Description : " + response.data[i].description );
+                    var npNameHeading = $("<h4>").addClass("card-title");
+                    //(response.data[i].fullName)
+                    var parkInfoLink = $("<a>").attr("href", response.data[i].url ).attr("target", "_blank").text(response.data[i].fullName);
+                    npNameHeading.append(parkInfoLink);
+                    cardBody.append(npNameHeading);
+                    //var parkInfoLink = $("<a>").attr("href", "_blank" ).text(response.data[i].url);
+                    //npName.on("click",parkInfoLink);
+                    
                     var npDescriptionTitle = $("<h2>").addClass("card-text DescriptionTitle").text("Description : ");
                     cardBody.append(npDescriptionTitle);
-                    npDescription = $("<p>").addClass("card-text DescriptionPara").text(response.data[i].description);
+                    let npDescription = $("<p>").addClass("card-text DescriptionPara").text(response.data[i].description);
                     cardBody.append(npDescription);
 
-                    var npActivities = $("<p>").addClass("card-text Activities").text("Activities : ");
-                    cardBody.append(npActivities);
-
-                    /*for(var j = 0; j < response.data[i].activities.length; j++ )
-                    {
-                        var npActivitiesListEl = $("<p>").attr("id", "listOfActivities").text(response.data[i].activities[j].name);
-                        npActivities.append(npActivitiesListEl);
-                    }*/
+                    var npActivitiesTitle = $("<h2>").addClass("card-text ActivitiesTitle").text("Activities : ");
+                    cardBody.append(npActivitiesTitle);
                     
-                    var npActivitiesListUL = $("<ul>").addClass("card-text");
-                    npActivities.append(npActivitiesListUL);
-                    
+                    //var npActivitiesListUL = $("<ul>").addClass("card-text");
+                    //npActivities.append(npActivitiesListUL);
+                    let npActivitiesList = [];
                     for(var j = 0; j < response.data[i].activities.length; j++ )
                     {
-                        let npActivitiesLiEl = $("<li>").attr("id", "listOfActivities").text(response.data[i].activities[j].name);
-                        npActivitiesListUL.append(npActivitiesLiEl);
+                        npActivitiesList.push(response.data[i].activities[j].name);
                     }
-                    
+                   
+                    let npActivities = $("<p>").addClass("card-text ActivitiesPara").text(npActivitiesList.join(", "));
+                    cardBody.append(npActivities);
+
+                    var weatherInfoTitle = $("<h2>").addClass("card-text weatherInfoTitle").text("WeatherInfo : ");
+                    cardBody.append(weatherInfoTitle);
+                    wetherDescription = $("<p>").addClass("card-text wetherdescriptionPara").text(response.data[i].weatherInfo);
+                    cardBody.append(wetherDescription);
+                    var currentWeatherInfoEl = $("<button>").attr("type","button").attr("class","currentWeatherInfo").text("Current Weather Information");
+                    cardBody.append(currentWeatherInfoEl);
+
                     latitude = response.data[i].latitude;
                     longitude = response.data[i].longitude;
-                    getCurrentConditions(latitude, longitude);
+
+                    currentWeatherInfoEl.on("click",getCurrentConditions(latitude, longitude));
                     
                      NPInfoConatinerEl.append(card);
 

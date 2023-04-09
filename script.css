@@ -100,7 +100,7 @@ p {
     
 }
 
-.DescriptionTitle,.Activities{
+.DescriptionTitle,.Activities,.weatherInfoTitle{
     font-size:30px;
     font-family:'Times New Roman', Times, serif;
     padding-bottom:0%;
@@ -108,7 +108,7 @@ p {
 }
     
 
-.DescriptionPara{
+.DescriptionPara,.wetherdescriptionPara{
     font-size:20px;
     font-family:cursive;
     margin-left: 30px;
@@ -130,4 +130,8 @@ p {
     
     font-size: 20px;
     font-family:fantasy;
+}
+.currentWeatherInfo {
+    width:30%;
+    background-color: crimson;
 }
