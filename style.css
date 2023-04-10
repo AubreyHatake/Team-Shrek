@@ -23,11 +23,11 @@ h1 {
 #NPSearch, #parklist {
   width:20%;  
 }
+
 #parklist {
     display:flex;
     
 }
-
 button {
     display: block;
     height: 20%;
@@ -113,7 +113,7 @@ p {
 }
     
 
-.DescriptionPara,.wetherdescriptionPara, .ActivitiesPara{
+.DescriptionPara,.wetherdescriptionParawetherdescriptionPara, .ActivitiesPara{
     font-size:20px;
     font-family:cursive;
     margin-left: 30px;

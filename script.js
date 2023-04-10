@@ -9,10 +9,10 @@ var nationalParkApiKey ="wyMlD52aDKYO8sIZ8Ix3x8MlocAQp0VtIGjyGluu";
 var nationalParkSearchEl = $("#NPSearch");
 var inputStateIdEl = $("#stateIdInput").val();
 var NPListEl = $("#NPList");
+var btnListEl = $("#btnList");
 var NPInfo = [];
 //var NPList = document.querySelector('#NPList');
 //var inputStateId = document.querySelector('#stateIdInput');
-
 
 
 var NPInfoConatinerEl = $("<div>").attr("id","NPInfoContainer");
@@ -50,7 +50,7 @@ var getNationalPark = function(inputStateIdEl)
         
         for(var i = 0; i < response.data.length; i++ )
         {
-        
+
             NPInfo.push(response.data[i].fullName);
             console.log(NPInfo[i]);
             let npListLiEl = $("<li>").attr("class","NPLists").attr("id", "listOfNp");
@@ -109,6 +109,7 @@ function npListButton() {
     getNationalPark(element);
     
 }
+ displayNpStateList();
 var storeNPList = [];
 
 function parkSelection (event)
