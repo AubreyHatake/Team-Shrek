@@ -9,9 +9,12 @@ var nationalParkApiKey ="wyMlD52aDKYO8sIZ8Ix3x8MlocAQp0VtIGjyGluu";
 var nationalParkSearchEl = $("#NPSearch");
 var inputStateIdEl = $("#stateIdInput").val();
 var NPListEl = $("#NPList");
+var btnListEl = $("#btnList");
 var NPInfo = [];
 var NPList = document.querySelector('#NPList');
 var inputStateId = document.querySelector('#stateIdInput');
+
+displayNpList()
 
 
 var NPInfoConatinerEl = $("<div>").attr("id","NPInfoContainer");
@@ -24,6 +27,7 @@ $("#stateIdInput").keypress(function(event)
     if(event.keyCode === 13)
     {
         event.preventDefault();
+        
         $("#NPSearch").click();
     }
 });
@@ -44,25 +48,55 @@ var getNationalPark = function(inputStateIdEl)
         
         for(var i = 0; i < response.data.length; i++ )
         {
+
+        
+      
+      
+
         
             NPInfo.push(response.data[i].fullName);
             console.log(NPInfo);
-          // NPListEl.append("<li>" + NPInfo[i] + "</li>");
+            let npListLiEl = $("<li>").attr("class","NPList").attr("id", "listOfNp");
+            NPListEl.append(npListLiEl);
             var NPDataListEl  = $("<button>").attr("type","button").attr("class","NPList").text(NPInfo[i]).val(inputStateIdEl);
-             NPListEl.append(NPDataListEl);
-             NPDataListEl.on("click",parkSelection);
+            NPDataListEl.on("click",parkSelection);
+            npListLiEl.append(NPDataListEl);
+            
         }
     });
     
 }    
 
+
+var stateIdArray = [];
+
+
+
 nationalParkSearchEl.on("click",function (event) {
     
+    event.preventDefault(); 
+    var inputStateIdEl =$("#stateIdInput").val(); 
+    stateIdArray.push(inputStateIdEl); 
+    console.log(stateIdArray);
+    localStorage.setItem("stateIdInput", JSON.stringify(stateIdArray));
+
+
+    
+
+    event.preventDefault(); 
+    var inputStateIdEl =$("#stateIdInput").val(); 
+    stateIdArray.push(inputStateIdEl); 
+    console.log(stateIdArray);
+    localStorage.setItem("stateIdInput", JSON.stringify(stateIdArray));
+
+
+    
+
     event.preventDefault();
+    NPInfoConatinerEl.empty();
     var inputStateIdEl =$("#stateIdInput").val();
-    localStorage.setItem("stateIdInput", inputStateIdEl);
-    localStorage.getItem("stateIdInput");
-    if(inputStateIdEl === "")
+   
+    if(inputStateIdEl === "" || inputStateIdEl === undefined)
     {
         alert("Please Enter valid statecode to display national parks");
     }
@@ -74,6 +108,50 @@ nationalParkSearchEl.on("click",function (event) {
     }
 
 });
+
+function displayNpList() {
+    var npList = JSON.parse(localStorage.getItem("stateIdInput")) || []
+    for (let index = 0; index < npList.length; index++) {
+        const element = npList[index];
+        console.log(element) 
+        var li= $("<li>") 
+        li.attr("class","li-element")
+        li.text(element)
+        li.click(npListButton)
+        btnListEl.append(li)
+    }
+
+
+
+}
+
+
+function npListButton() {
+    var  element= $(this).text();
+    console.log(element);  
+    getNationalPark(element);
+}
+
+
+
+
+// localStorage.getItem("stateIdInput");
+    // if(inputStateIdEl === "")
+    // {
+    //     alert("Please Enter valid statecode to display national parks");
+    // }
+    // else {
+        
+    //     getNationalPark(inputStateIdEl);
+        
+    //     $("#stateIdInput").val("");
+    // }
+
+
+
+
+
+
 
 
 // get history from local storage if any
@@ -87,12 +165,10 @@ nationalParkSearchEl.on("click",function (event) {
 
 
 
-
 function parkSelection (event)
 {
     event.preventDefault();
-    console.log(event.target.value);
-    console.log(event.target.textContent);
+    
     var stateId = event.target.value;
     var parkName = event.target.textContent;
 
@@ -107,22 +183,57 @@ function parkSelection (event)
         {
             console.log(response.data);
             NPInfoConatinerEl.empty();
-            latitude = response.data.latitude;
-            longitude = response.data.longitude; 
-            getCurrentConditions(latitude, longitude); 
+            
             for(var i = 0; i < response.data.length; i++ )
             {
                 if(response.data[i].fullName === parkName)
                 {
+
                     var card = $("<div>").addClass("card col-12 col-md-2 ");
                     var cardBody = $("<div>").addClass("card-body p-3 NPBody");
-                    var NPName = $("<h4>").addClass("card-title").text(response.data[i].fullName);
-                    var NPDescription = $("<p>").addClass("card-text Description").text("Description : " + response.data[i].description );
-                    var NPActivities = $("<p>").addClass("card-text Activities").text("Activities : " + response.data[i].activities[i].name);
-                    
-                    cardBody.append(NPName, NPDescription, NPActivities);
                     card.append(cardBody);
+                    var npNameHeading = $("<h4>").addClass("card-title");
+                    //(response.data[i].fullName)
+                    var parkInfoLink = $("<a>").attr("href", response.data[i].url ).attr("target", "_blank").text(response.data[i].fullName);
+                    npNameHeading.append(parkInfoLink);
+                    cardBody.append(npNameHeading);
+                    //var parkInfoLink = $("<a>").attr("href", "_blank" ).text(response.data[i].url);
+                    //npName.on("click",parkInfoLink);
+                    
+                    var npDescriptionTitle = $("<h2>").addClass("card-text DescriptionTitle").text("Description : ");
+                    cardBody.append(npDescriptionTitle);
+                    let npDescription = $("<p>").addClass("card-text DescriptionPara").text(response.data[i].description);
+                    cardBody.append(npDescription);
+
+                    var npActivitiesTitle = $("<h2>").addClass("card-text ActivitiesTitle").text("Activities : ");
+                    cardBody.append(npActivitiesTitle);
+                    
+                    //var npActivitiesListUL = $("<ul>").addClass("card-text");
+                    //npActivities.append(npActivitiesListUL);
+                    let npActivitiesList = [];
+                    for(var j = 0; j < response.data[i].activities.length; j++ )
+                    {
+                        npActivitiesList.push(response.data[i].activities[j].name);
+                    }
+                   
+                    let npActivities = $("<p>").addClass("card-text ActivitiesPara").text(npActivitiesList.join(", "));
+                    cardBody.append(npActivities);
+
+                    var weatherInfoTitle = $("<h2>").addClass("card-text weatherInfoTitle").text("WeatherInfo : ");
+                    cardBody.append(weatherInfoTitle);
+                    wetherDescription = $("<p>").addClass("card-text wetherdescriptionPara").text(response.data[i].weatherInfo);
+                    cardBody.append(wetherDescription);
+                    var currentWeatherInfoEl = $("<button>").attr("type","button").attr("class","currentWeatherInfo").text("Current Weather Information");
+                    cardBody.append(currentWeatherInfoEl);
+
+                    latitude = response.data[i].latitude;
+                    longitude = response.data[i].longitude;
+
+                    currentWeatherInfoEl.on("click",getCurrentConditions(latitude, longitude));
+                    
                      NPInfoConatinerEl.append(card);
+
+
                 }
             }
         });
@@ -144,8 +255,8 @@ var getCurrentConditions = (latitude, longitude) => {
     return response.json();
 })
 .then(data => {
-     console.log("CURR DAY: ", data);
-    //  displayCurrentConditions(data);
+    console.log(data)
+     return data;
 })}
 
     

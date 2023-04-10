@@ -20,6 +20,10 @@ h1 {
     
 }
 
+#NPSearch, #parklist {
+  width:20%;  
+}
+
 button {
     display: block;
     height: 20%;
@@ -53,7 +57,7 @@ p {
     font-weight: bold;
 }
 
-#datepicker {
+/*#datepicker {
     font-size: 16px;
     border-radius: auto;
     border-width: auto;
@@ -61,7 +65,7 @@ p {
     padding: 10px;
     font-family: 'cambria';
     font-weight: bold;
-}
+}*/
 
 .city-weather {
     float: center;
@@ -82,13 +86,68 @@ p {
    
 }
 
+<<<<<<< HEAD:style.css
+#list-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.li-element {
+    list-style-type: none;
+    background-color: rgb(63, 87, 68);
+    width: 100%;
+    color: white;
+    text-align: center;
+}
+=======
 #infoContainer{
     display:flex;
 }
-#parklist{
-    width:20%;
 
-}
 #NPInfoContainer{
     width:80%;
 }
+.card-title{
+    font-size: 50px;
+    font-family: 'Times New Roman', Times, serif;
+    color:darkgreen;
+    
+}
+
+.DescriptionTitle,.Activities,.weatherInfoTitle{
+    font-size:30px;
+    font-family:'Times New Roman', Times, serif;
+    padding-bottom:0%;
+    margin-bottom: auto;
+}
+    
+
+.DescriptionPara,.wetherdescriptionPara{
+    font-size:20px;
+    font-family:cursive;
+    margin-left: 30px;
+    margin-top: 0%;
+    padding-top: 0%;
+}
+
+
+#listOfNp {
+
+    list-style-type: none;
+}
+/*.Activities{
+    font-size: 30px;
+    font-family: Courier New', Courier, monospace ;
+    
+}*/
+#listOfActivities {
+    
+    font-size: 20px;
+    font-family:fantasy;
+}
+.currentWeatherInfo {
+    width:30%;
+    background-color: crimson;
+}
+>>>>>>> ec96b0e6be67c04872cab2a06f24f667a59ed389:script.css
