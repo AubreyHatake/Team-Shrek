@@ -96,7 +96,7 @@ p {
     
 }
 
-.DescriptionTitle,.Activities,.weatherInfoTitle{
+.DescriptionTitle,.ActivitiesTitle,.weatherInfoTitle{
     font-size:30px;
     font-family:'Times New Roman', Times, serif;
     padding-bottom:0%;
@@ -104,7 +104,7 @@ p {
 }
     
 
-.DescriptionPara,.wetherdescriptionPara, .ActivitiesPara{
+.DescriptionPara, .wetherdescriptionPara, .ActivitiesPara{
     font-size:20px;
     font-family:cursive;
     margin-left: 30px;

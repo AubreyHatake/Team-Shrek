@@ -183,7 +183,7 @@ function parkSelection (event)
                     latitude = response.data[i].latitude;
                     longitude = response.data[i].longitude;
 
-                    currentWeatherInfoEl.on("click",getCurrentConditions(latitude, longitude));
+                    currentWeatherInfoEl.on("click", getCurrentConditions(latitude, longitude));
                         cardBody.append(currentWeather);
 
                      NPInfoConatinerEl.append(card);
@@ -194,6 +194,8 @@ function parkSelection (event)
         });
      
 }
+
+
 //local storage clears when page reloads
 function reset()
  {
@@ -230,6 +232,7 @@ function displayCurrentConditions (data) {
     if (currentWeather.firstChild) {
         currentWeather.firstChild.remove();
     }
+    //currentWeather.empty();
 
     currentWeather.append("Curent Date :" + dateString );
 
