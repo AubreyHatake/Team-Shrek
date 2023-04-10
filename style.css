@@ -62,24 +62,15 @@ p {
     font-weight: bold;
 }
 
-/*#datepicker {
-    font-size: 16px;
-    border-radius: auto;
-    border-width: auto;
-    display: block;
-    padding: 10px;
-    font-family: 'cambria';
-    font-weight: bold;
-}*/
-
-.city-weather {
+/*#current-weather {
     float: center;
     width: 40%;
     height: 30%;
     font-family: 'Cambria';
     background-color: rgb(203, 221, 204);
     color:rgb(66, 39, 57);
-}
+}*/
+
 
 .swamp {
     height: 300px;
@@ -113,7 +104,7 @@ p {
 }
     
 
-.DescriptionPara,.wetherdescriptionParawetherdescriptionPara, .ActivitiesPara{
+.DescriptionPara,.wetherdescriptionPara, .ActivitiesPara{
     font-size:20px;
     font-family:cursive;
     margin-left: 30px;
@@ -126,11 +117,7 @@ p {
 
     list-style-type: none;
 }
-/*.Activities{
-    font-size: 30px;
-    font-family: Courier New', Courier, monospace ;
-    
-}*/
+
 #listOfActivities {
     
     font-size: 20px;
