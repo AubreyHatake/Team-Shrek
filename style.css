@@ -150,3 +150,21 @@ p {
     padding:3%;
 
 }
+
+
+.weather {
+    text-align: left;
+    border-style: solid;
+    border-color: rgb(184, 232, 184);
+    width: 20%;
+    font-family: 'Georgia';
+    background-color: rgb(217, 238, 217);
+
+}
+
+.weatherdata {
+    text-align: left;
+    font-family: 'Arial';
+    background-color: rgb(153, 212, 161);
+    width: 20%;
+}
