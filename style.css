@@ -24,6 +24,10 @@ h1 {
   width:20%;  
 }
 
+#parklist {
+    display:flex;
+    
+}
 button {
     display: block;
     height: 20%;
@@ -43,7 +47,8 @@ button {
 
 
 body {
-    padding: 20px;
+    padding:0%;
+    margin:0%;
 }
 
 p {
@@ -86,21 +91,6 @@ p {
    
 }
 
-<<<<<<< HEAD:style.css
-#list-container {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-}
-
-.li-element {
-    list-style-type: none;
-    background-color: rgb(63, 87, 68);
-    width: 100%;
-    color: white;
-    text-align: center;
-}
-=======
 #infoContainer{
     display:flex;
 }
@@ -123,7 +113,7 @@ p {
 }
     
 
-.DescriptionPara,.wetherdescriptionPara{
+.DescriptionPara,.wetherdescriptionParawetherdescriptionPara, .ActivitiesPara{
     font-size:20px;
     font-family:cursive;
     margin-left: 30px;
@@ -150,4 +140,13 @@ p {
     width:30%;
     background-color: crimson;
 }
->>>>>>> ec96b0e6be67c04872cab2a06f24f667a59ed389:script.css
+#liOfStateId{
+    list-style-type: none;
+    margin:0%;
+    padding:0%
+}
+.NPLists{
+    margin:1%;
+    padding:3%;
+
+}
