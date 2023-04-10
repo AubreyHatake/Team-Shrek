@@ -23,6 +23,10 @@ h1 {
 #NPSearch, #parklist {
   width:20%;  
 }
+#parklist {
+    display:flex;
+    
+}
 
 button {
     display: block;
@@ -43,7 +47,8 @@ button {
 
 
 body {
-    padding: 20px;
+    padding:0%;
+    margin:0%;
 }
 
 p {
@@ -108,7 +113,7 @@ p {
 }
     
 
-.DescriptionPara,.wetherdescriptionPara{
+.DescriptionPara,.wetherdescriptionPara, .ActivitiesPara{
     font-size:20px;
     font-family:cursive;
     margin-left: 30px;
@@ -134,4 +139,14 @@ p {
 .currentWeatherInfo {
     width:30%;
     background-color: crimson;
+}
+#liOfStateId{
+    list-style-type: none;
+    margin:0%;
+    padding:0%
+}
+.NPLists{
+    margin:1%;
+    padding:3%;
+
 }
