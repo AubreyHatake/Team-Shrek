@@ -228,14 +228,24 @@ var getCurrentConditions = (latitude, longitude) =>
     });
 }
 
+
+function empty(element) {
+    element.textContent = ""; 
+ }
+ 
+
     
 
 // this function is to display the city name, temp. the function is getting called on line 26, so that I can use the data from the getcurrentconditions function.
 function displayCurrentConditions (data) {
     
     if (currentWeather.firstChild) {
+
         //currentWeather.empty();
         currentWeather.firstChild.remove();
+
+        currentWeather.firstChild.empty();
+
     }
     
 
