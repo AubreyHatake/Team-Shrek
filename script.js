@@ -3,6 +3,8 @@ var weatherApiKey = "855fad25288edda6cdf233e97e030127";
 var latitude = 0;
 var longitude = 0;
 var currentWeather = document.querySelector('#current-weather');
+var currentWeatherContent = "";
+
 
 const date = new Date();
 var dateString = date.toLocaleDateString();
@@ -122,6 +124,7 @@ var storeNPList = [];
 
 function parkSelection (event)
 {
+   // currentWeather.removeChild(currentWeatherContent);
     event.preventDefault();
     
     var stateId = event.target.value;
@@ -184,9 +187,9 @@ function parkSelection (event)
                     longitude = response.data[i].longitude;
 
                     //currentWeatherInfoEl.on("click", 
-                    getCurrentConditions(latitude, longitude)
+                    getCurrentConditions(latitude, longitude);
                     
-                        cardBody.append(currentWeather);
+                    cardBody.append(currentWeather);
 
                      NPInfoConatinerEl.append(card);
 
@@ -228,79 +231,66 @@ var getCurrentConditions = (latitude, longitude) =>
     });
 }
 
-
-function empty(element) {
-    element.textContent = ""; 
- }
- 
-
-    
-
 // this function is to display the city name, temp. the function is getting called on line 26, so that I can use the data from the getcurrentconditions function.
-function displayCurrentConditions (data) {
-    
-    if (currentWeather.firstChild) {
+function displayCurrentConditions (data) {    
 
-        //currentWeather.empty();
-        currentWeather.firstChild.remove();
+    currentWeatherContent = document.createElement("div");
+    currentWeatherContent.id = "weatherInfo";
 
-        currentWeather.firstChild.empty();
-
-    }
-    
-
-    currentWeather.append("Curent Date :" + dateString );
+    currentWeatherContent.append("Curent Date :" + dateString );
 
     let h2 = document.createElement('h2');
     h2.textContent = data.name;
-    currentWeather.append(h2);
+    currentWeatherContent.append(h2);
     h2.classList.add('weather');
 
     var ul = document.createElement('ul');
     ul.textContent = "Temp:"
-    currentWeather.append(ul);
+    currentWeatherContent.append(ul);
     ul.classList.add('weather');
     var li = document.createElement('li');
     li.textContent = data.main.temp;
-    currentWeather.append(li);
+    currentWeatherContent.append(li);
     li.classList.add('weatherdata');
 
     var ul = document.createElement('ul');
     ul.textContent = "Feels like :"
-    currentWeather.append(ul);
+    currentWeatherContent.append(ul);
     ul.classList.add('weather');
     var li = document.createElement('li');
     li.textContent = data.main.feels_like;
-    currentWeather.append(li);
+    currentWeatherContent.append(li);
     li.classList.add('weatherdata');
 
     var ul = document.createElement('ul');
     ul.textContent = "Temp high :"
-    currentWeather.append(ul);
+    currentWeatherContent.append(ul);
     ul.classList.add('weather');
     var li = document.createElement('li');
     li.textContent = data.main.temp_max
-    currentWeather.append(li);
+    currentWeatherContent.append(li);
 
     li.classList.add('weatherdata');
     var ul = document.createElement('ul');
     ul.textContent = "Temp low :"
-    currentWeather.append(ul);
+    currentWeatherContent.append(ul);
     ul.classList.add('weather');
     var li = document.createElement('li');
     li.textContent = data.main.temp_min;
-    currentWeather.append(li);
+    currentWeatherContent.append(li);
 
     li.classList.add('weatherdata');
     var ul = document.createElement('ul');
     ul.textContent = "Wind speed: ";
-    currentWeather.append(ul);
+    currentWeatherContent.append(ul);
     ul.classList.add('weather');
     var li = document.createElement('li');
     li.textContent = data.wind.speed;
-    currentWeather.append(li);
+    currentWeatherContent.append(li);
 
     li.classList.add('weatherdata');
+
+    currentWeather.appendChild(currentWeatherContent);
     
 }
 
