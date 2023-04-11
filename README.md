@@ -3,9 +3,7 @@
 DEPLOYED SITE LINK WILL GO HERE: 
 
 ##  National Park Weather Check
-
-
-For this site the user is able to view the weather conditions for the national parks that they are planing on going on.  
+    In this application the user is able to view the weather conditions of the curret day for the national parks that they are planing on going on.  
 
 ## User Story 
 As a nature enthusiast, 
@@ -36,19 +34,14 @@ I want to use an application that allows me to track the locations and weather c
  8. Whenever  we click on the national park button ,
   Then the name of the national park is stored in the local storage.
  9. When the weather information is displayed.
-
    Then along with the weather information like temperature,wind and feels like it should have the current date and city name of the national park. 
  10. WHEN I resize the page or view the site on various screens and devices
-  THEN I am presented with a responsive layout that adapts to my viewport
+  THEN I am presented with a responsive layout that adapts to my viewport.
 
   ## Screen Shot
   [!National Park Weather](Screenshot-national-park.png)
 
 
-   Then along with the weather information like temperature,wind and feels like it should have the current date and city name of the national park.
- 10. WHEN I resize the page or view the site on various screens and devices
-  THEN I am presented with a responsive layout that adapts to my viewport
-  ## Screen Shot
-  [!National Park Weather](Screenshot-national-park.png)
+   
 
 

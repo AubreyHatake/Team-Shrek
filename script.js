@@ -1,4 +1,5 @@
 // Variables 
+
 var weatherApiKey = "855fad25288edda6cdf233e97e030127";
 var latitude = 0;
 var longitude = 0;
@@ -16,8 +17,6 @@ var inputStateIdEl = $("#stateIdInput").val();
 var NPListEl = $("#NPList");
 var btnListEl = $("#btnList");
 var NPInfo = [];
-//var NPList = document.querySelector('#NPList');
-//var inputStateId = document.querySelector('#stateIdInput');
 
 
 var NPInfoConatinerEl = $("<div>").attr("id","NPInfoContainer");
