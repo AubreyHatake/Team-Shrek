@@ -24,6 +24,10 @@ h1 {
   width:20%;  
 }
 
+#parklist {
+    display:flex;
+    
+}
 button {
     display: block;
     height: 20%;
@@ -43,7 +47,8 @@ button {
 
 
 body {
-    padding: 20px;
+    padding:0%;
+    margin:0%;
 }
 
 p {
@@ -86,6 +91,7 @@ p {
    
 }
 
+<<<<<<< HEAD
 #list-container {
     display: flex;
     justify-content: space-around;
@@ -98,6 +104,8 @@ p {
     color: white;
     text-align: center;
 }
+=======
+>>>>>>> e4b88160d9ed3bc9c709cb9a06808768bffc0a3f
 #infoContainer{
     display:flex;
 }
@@ -120,7 +128,7 @@ p {
 }
     
 
-.DescriptionPara,.wetherdescriptionPara{
+.DescriptionPara,.wetherdescriptionParawetherdescriptionPara, .ActivitiesPara{
     font-size:20px;
     font-family:cursive;
     margin-left: 30px;
@@ -147,3 +155,34 @@ p {
     width:30%;
     background-color: crimson;
 }
+<<<<<<< HEAD
+=======
+#liOfStateId{
+    list-style-type: none;
+    margin:0%;
+    padding:0%
+}
+.NPLists{
+    margin:1%;
+    padding:3%;
+
+}
+
+
+.weather {
+    text-align: left;
+    border-style: solid;
+    border-color: rgb(184, 232, 184);
+    width: 20%;
+    font-family: 'Georgia';
+    background-color: rgb(217, 238, 217);
+
+}
+
+.weatherdata {
+    text-align: left;
+    font-family: 'Arial';
+    background-color: rgb(153, 212, 161);
+    width: 20%;
+}
+>>>>>>> e4b88160d9ed3bc9c709cb9a06808768bffc0a3f
