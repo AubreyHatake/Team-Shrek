@@ -2,6 +2,7 @@
     margin: 5px;
     padding: 5px;
     background-color: rgb(217, 238, 217);
+
 }
 h1 {
     text-align: center;
@@ -9,12 +10,15 @@ h1 {
     font-family: 'cambria';
     color: rgb(66, 39, 57);
 }
-.textarea {
+/*.textarea {
     height: 80%;
     width: 20%;
     background-color: whitesmoke;
+}*/
+.modal {
+    width :20%;
 }
-#NPSearch, #parklist {
+#NPSearch, #stateIdInput, #parklist {
   width:20%;
 }
 #parklist {
@@ -113,11 +117,13 @@ p {
 }
 #liOfStateId{
     list-style-type: none;
-    margin:0%;
-    padding:0%
+    margin:1%;
+    padding:3%;
+    
 }
 .NPLists{
-    margin:1%;
+    
+    margin:2%;
     padding:3%;
 }
 .weatherdata {

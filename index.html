@@ -3,26 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--  <meta name="viewport" content="width=device-width, initial-scale=1.0">--->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link  rel="stylesheet" href="./assets/style.css" > </link>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
     <title>National Park</title>
 </head>
 <header>
-    <h1> National Park</h1>
+    <h1 class="is-size-1-desktop is-size-4-mobile is-uppercase is-italic"> National Park</h1>
    <!---- <h1>Search National Parks using State Id!</h1>--->
 </header>
 <body>
     <div class="nationalPark">
         <center>
-           <input id="stateIdInput" class="textarea" placeholder="Enter state ID">
+            
+           <input id="stateIdInput" class="input is-normal " type="text" placeholder="Enter state ID">
             <button id="NPSearch"> Search National Parks </button>
+        
+
         </center>
 
-        <div id="infoContainer">
-            <div id="parklist"> 
+        <div id="infoContainer" class="">
+            <div id="parklist is-size-1-desktop is-size-4-mobile"> 
                 <ul id="NPList"> </ul>
             </div>
          </div>
@@ -31,7 +37,16 @@
     </div>
 
     <div class="swamp" >
-    </div>    
+    </div>  
+    <!---- MODALS --> 
+    <div  class = "modal">
+        <div class="modal-background"></div>
+        <div class="modal-content has-background-white ">            
+                <p>Please Enter Valid statecode to display national parks</p>
+                <button class="button is-small" id="closebtn">Close Modal</button>
+        </div>
+        </div>
+    </div> 
                   
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script src="script.js"> </script>

@@ -15,7 +15,15 @@ var nationalParkSearchEl = $("#NPSearch");
 var inputStateIdEl = $("#stateIdInput").val();
 var NPListEl = $("#NPList");
 var btnListEl = $("#btnList");
+
 var NPInfo = [];
+
+const modal = document.querySelector('.modal');
+const modalBg = document.querySelector('.modal-background');
+modal.addEventListener('click',function()
+{
+    modal.classList.remove('is-active');
+});
 
 
 var NPInfoConatinerEl = $("<div>").attr("id","NPInfoContainer");
@@ -24,6 +32,7 @@ parkInfoContainer.append(NPInfoConatinerEl);
 
 
 var btnListEl = $("<div>").attr("id","btnList");
+
 parkInfoContainer.append(btnListEl);
 //var btnListEl = $("#btnList");
 
@@ -79,11 +88,15 @@ nationalParkSearchEl.on("click",function (event)
    
     if(inputStateIdEl === "" || inputStateIdEl === undefined)
     {
-        
-        alert("Please Enter valid statecode to display national parks");
+
+        nationalParkSearchEl = $(".modal").addclass('is-active');
+       // alert("Please Enter valid statecode to display national parks");
     }
     else 
-    {       
+    {    
+        $("#closebtn").click(function(){
+            $(".modal").removeclass('is-active');  
+        });
         getNationalPark(inputStateIdEl);
         displayNpStateList();
         $("#stateIdInput").val("");
@@ -235,6 +248,7 @@ var getCurrentConditions = (latitude, longitude) =>
 function displayCurrentConditions (data) {    
 
     currentWeatherContent = document.createElement("div");
+    
     currentWeatherContent.setAttribute('id',"weatherInfo");
    
     //currentWeatherContent.append("Curent Date :" + dateString );
