@@ -177,13 +177,15 @@ function parkSelection (event)
                     cardBody.append(weatherInfoTitle);
                     wetherDescription = $("<p>").addClass("card-text wetherdescriptionPara").text(response.data[i].weatherInfo);
                     cardBody.append(wetherDescription);
-                    var currentWeatherInfoEl = $("<button>").attr("type","button").attr("class","currentWeatherInfo").text("Current Weather Information");
-                    cardBody.append(currentWeatherInfoEl);
+                    //var currentWeatherInfoEl = $("<button>").attr("type","button").attr("class","currentWeatherInfo").text("Current Weather Information");
+                    //cardBody.append(currentWeatherInfoEl);
 
                     latitude = response.data[i].latitude;
                     longitude = response.data[i].longitude;
 
-                    currentWeatherInfoEl.on("click", getCurrentConditions(latitude, longitude));
+                    //currentWeatherInfoEl.on("click", 
+                    getCurrentConditions(latitude, longitude)
+                    
                         cardBody.append(currentWeather);
 
                      NPInfoConatinerEl.append(card);
@@ -220,6 +222,7 @@ var getCurrentConditions = (latitude, longitude) =>
     .then(data => 
     {
     console.log("DATA: ", data)
+   
     displayCurrentConditions(data);
      return data;
     });
@@ -229,10 +232,12 @@ var getCurrentConditions = (latitude, longitude) =>
 
 // this function is to display the city name, temp. the function is getting called on line 26, so that I can use the data from the getcurrentconditions function.
 function displayCurrentConditions (data) {
+    
     if (currentWeather.firstChild) {
+        //currentWeather.empty();
         currentWeather.firstChild.remove();
     }
-    //currentWeather.empty();
+    
 
     currentWeather.append("Curent Date :" + dateString );
 
