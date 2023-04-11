@@ -86,11 +86,9 @@ p {
    
 }
 
-<<<<<<< HEAD:style.css
 #list-container {
     display: flex;
     justify-content: space-around;
-    flex-wrap: wrap;
 }
 
 .li-element {
@@ -100,7 +98,6 @@ p {
     color: white;
     text-align: center;
 }
-=======
 #infoContainer{
     display:flex;
 }
@@ -150,4 +147,3 @@ p {
     width:30%;
     background-color: crimson;
 }
->>>>>>> ec96b0e6be67c04872cab2a06f24f667a59ed389:script.css

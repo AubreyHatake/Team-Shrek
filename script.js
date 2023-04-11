@@ -69,7 +69,6 @@ var stateIdArray = [];
 
 nationalParkSearchEl.on("click",function (event) {
     
-<<<<<<< HEAD
     event.preventDefault(); 
     var inputStateIdEl =$("#stateIdInput").val(); 
     stateIdArray.push(inputStateIdEl); 
@@ -78,24 +77,21 @@ nationalParkSearchEl.on("click",function (event) {
 
 
     
-=======
-    event.preventDefault();
-    NPInfoConatinerEl.empty();
-    var inputStateIdEl =$("#stateIdInput").val();
-    localStorage.setItem("stateIdInput", inputStateIdEl);
-    if(inputStateIdEl === "" || inputStateIdEl === undefined)
-    {
-        alert("Please Enter valid statecode to display national parks");
-    }
-    else {
+    // event.preventDefault();
+    // NPInfoConatinerEl.empty();
+    // var inputStateIdEl =$("#stateIdInput").val();
+    // if(inputStateIdEl === "" || inputStateIdEl === undefined)
+    // {
+    //     alert("Please Enter valid statecode to display national parks");
+    // }
+    // else {
         
-        getNationalPark(inputStateIdEl);
+    //     getNationalPark(inputStateIdEl);
         
-        $("#stateIdInput").val("");
+    //     $("#stateIdInput").val("");
     }
 
->>>>>>> ec96b0e6be67c04872cab2a06f24f667a59ed389
-});
+);
 
 function displayNpList() {
     var npList = JSON.parse(localStorage.getItem("stateIdInput")) || []
