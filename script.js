@@ -1,12 +1,11 @@
-// Variables 
-
+// Global variable declaration
+//variables fro weather API
 var weatherApiKey = "855fad25288edda6cdf233e97e030127";
 var latitude = 0;
 var longitude = 0;
 var currentWeather = document.querySelector('#current-weather');
 var currentWeatherContent = "";
-
-
+//get the current date
 const date = new Date();
 var dateString = date.toLocaleDateString();
 
@@ -18,16 +17,16 @@ var NPListEl = $("#NPList");
 var btnListEl = $("#btnList");
 var NPInfo = [];
 
-
 var NPInfoConatinerEl = $("<div>").attr("id","NPInfoContainer");
 var parkInfoContainer = $("#infoContainer");
 parkInfoContainer.append(NPInfoConatinerEl);
 
-//var npStateIdEl = $("<div>").attr("id","npStateIdContainer");
+
 var btnListEl = $("<div>").attr("id","btnList");
 parkInfoContainer.append(btnListEl);
 //var btnListEl = $("#btnList");
 
+//state id search with enter keypress
 $("#stateIdInput").keypress(function(event) 
 {
     if(event.keyCode === 13)
@@ -38,9 +37,9 @@ $("#stateIdInput").keypress(function(event)
     }
 });
 
+//with state ID search get the national park list from the serverside API.
 var getNationalPark = function(inputStateIdEl)
-{
-    
+{    
     const requestUrl = "https://developer.nps.gov/api/v1/parks?stateCode=" + inputStateIdEl + "&api_key=" + nationalParkApiKey;
     $.ajax({
         url: requestUrl,
@@ -65,11 +64,11 @@ var getNationalPark = function(inputStateIdEl)
         }
     });
     
-}    
+}  
+// Storing State Id search in the localstorage.
 var stateIdArray = [];
 nationalParkSearchEl.on("click",function (event)
- {
-    
+{   
     event.preventDefault();
     NPInfoConatinerEl.empty();
     var inputStateIdEl =$("#stateIdInput").val();
@@ -82,8 +81,8 @@ nationalParkSearchEl.on("click",function (event)
         
         alert("Please Enter valid statecode to display national parks");
     }
-    else {
-        
+    else 
+    {       
         getNationalPark(inputStateIdEl);
         displayNpStateList();
         $("#stateIdInput").val("");
@@ -91,6 +90,7 @@ nationalParkSearchEl.on("click",function (event)
 
 });
 
+// Get the state id search from localstorage for further click event and display on page.
 function displayNpStateList()
  {
     btnListEl.empty();
@@ -104,12 +104,9 @@ function displayNpStateList()
         var btnListLiEL = $("<button>").attr("type","button").attr("class","li-element").text(element);
         li.append(btnListLiEL);
         btnListLiEL.on("click",npListButton);
-       // li.attr("class","li-element")
-       // li.text(element)
-        //li.click(npListButton)
-        //btnListEl.append(li)
     }
 }
+
 function npListButton() 
 {
     NPInfoConatinerEl.empty();
@@ -119,20 +116,21 @@ function npListButton()
     
 }
  displayNpStateList();
-var storeNPList = [];
 
+//get the information of the national parks from serverside api with state id search. 
+var storeNPList = [];
 function parkSelection (event)
 {
-   // currentWeather.removeChild(currentWeatherContent);
+   
     event.preventDefault();
     
     var stateId = event.target.value;
     var parkName = event.target.textContent;
-
-
+    //get the parklist stored in the local store for the further click event.
     var storeNPList = JSON.parse(localStorage.getItem("National-Park-List")) || [];
     storeNPList.push(parkName);
     console.log(storeNPList);
+    //stores the park list in the local storage 
     localStorage.setItem("National-Park-List", JSON.stringify(storeNPList));
         const requestUrl = "https://developer.nps.gov/api/v1/parks?stateCode=" + stateId + "&api_key=" + nationalParkApiKey;
         $.ajax({
@@ -147,25 +145,44 @@ function parkSelection (event)
             {
                 if(response.data[i].fullName === parkName)
                 {
-
+                    //created div card to disolay information about national park
                     var card = $("<div>").addClass("card col-12 col-md-2 ");
                     var cardBody = $("<div>").addClass("card-body p-3 NPBody");
                     card.append(cardBody);
-                    var npNameHeading = $("<h4>").addClass("card-title");
-                    
+
+                    //displays name of the national park with link for information
+                    var npNameHeading = $("<h4>").addClass("card-title");                    
                     var parkInfoLink = $("<a>").attr("href", response.data[i].url ).attr("target", "_blank").text(response.data[i].fullName);
                     npNameHeading.append(parkInfoLink);
                     cardBody.append(npNameHeading);
-                    
+
+                    //displays descriptin for that national park
                     var npDescriptionTitle = $("<h2>").addClass("card-text DescriptionTitle").text("Description : ");
                     cardBody.append(npDescriptionTitle);
                     let npDescription = $("<p>").addClass("card-text DescriptionPara").text(response.data[i].description);
                     cardBody.append(npDescription);
 
+                    //displays weather information 
+                    var weatherInfoTitle = $("<h2>").addClass("card-text weatherInfoTitle").text("WeatherInfo : ");
+                    cardBody.append(weatherInfoTitle);
+                    wetherDescription = $("<p>").addClass("card-text wetherdescriptionPara").text(response.data[i].weatherInfo);
+                    cardBody.append(wetherDescription);
+                
+                    //Displays current weather codndition of the city
+                    //var currentWeatherInfoEl = $("<button>").attr("type","button").attr("class","currentWeatherInfo").text("Current Weather Information");
+                    //cardBody.append(currentWeatherInfoEl);
+                    
+                    latitude = response.data[i].latitude;
+                    longitude = response.data[i].longitude;
+                    getCurrentConditions(latitude, longitude);
+                    //currentWeatherInfoEl.on("click",
+                    cardBody.append(currentWeather);
+                    cardBody.append(currentWeatherContent);
+
+                    //displays actities in that national parks
                     var npActivitiesTitle = $("<h2>").addClass("card-text ActivitiesTitle").text("Activities : ");
                     cardBody.append(npActivitiesTitle);
-                    
-                    
+                                        
                     let npActivitiesList = [];
                     for(var j = 0; j < response.data[i].activities.length; j++ )
                     {
@@ -175,23 +192,8 @@ function parkSelection (event)
                     let npActivities = $("<p>").addClass("card-text ActivitiesPara").text(npActivitiesList.join(", "));
                     cardBody.append(npActivities);
 
-                    var weatherInfoTitle = $("<h2>").addClass("card-text weatherInfoTitle").text("WeatherInfo : ");
-                    cardBody.append(weatherInfoTitle);
-                    wetherDescription = $("<p>").addClass("card-text wetherdescriptionPara").text(response.data[i].weatherInfo);
-                    cardBody.append(wetherDescription);
-                    //var currentWeatherInfoEl = $("<button>").attr("type","button").attr("class","currentWeatherInfo").text("Current Weather Information");
-                    //cardBody.append(currentWeatherInfoEl);
-
-                    latitude = response.data[i].latitude;
-                    longitude = response.data[i].longitude;
-
-                    //currentWeatherInfoEl.on("click", 
-                    getCurrentConditions(latitude, longitude);
-                    
-                    cardBody.append(currentWeather);
-
-                     NPInfoConatinerEl.append(card);
-
+                    NPInfoConatinerEl.append(card);
+                    currentWeatherContent.replaceWith(currentWeather);                    
 
                 }
             }
@@ -204,14 +206,12 @@ function parkSelection (event)
 function reset()
  {
     localStorage.clear();
+    btnListEl.empty();
 }
 window.onload = reset();
 
-
-    
-var weatherEl = document.querySelector(".weather")
-
-
+//getting weather ingormation from openweathermap api   
+var weatherEl = document.querySelector(".weather");
 var getCurrentConditions = (latitude, longitude) => 
 {
     var weatherURL = "https://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&units=imperial" + "&appid=" + weatherApiKey
@@ -230,12 +230,13 @@ var getCurrentConditions = (latitude, longitude) =>
     });
 }
 
-// this function is to display the city name, temp. the function is getting called on line 26, so that I can use the data from the getcurrentconditions function.
+//Displays the weather information
 function displayCurrentConditions (data) {    
 
     currentWeatherContent = document.createElement("div");
-    currentWeatherContent.id = "weatherInfo";
+    currentWeatherContent.setAttribute('id',"weatherInfo");
 
+    
     currentWeatherContent.append("Curent Date :" + dateString );
 
     let h2 = document.createElement('h2');
