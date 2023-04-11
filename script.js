@@ -17,6 +17,7 @@ var NPListEl = $("#NPList");
 var btnListEl = $("#btnList");
 var NPInfo = [];
 
+
 var NPInfoConatinerEl = $("<div>").attr("id","NPInfoContainer");
 var parkInfoContainer = $("#infoContainer");
 parkInfoContainer.append(NPInfoConatinerEl);
@@ -179,7 +180,7 @@ function parkSelection (event)
                     cardBody.append(currentWeather);
                     cardBody.append(currentWeatherContent);
 
-                    //displays actities in that national parks
+                    //displays actities in that national parks.
                     var npActivitiesTitle = $("<h2>").addClass("card-text ActivitiesTitle").text("Activities : ");
                     cardBody.append(npActivitiesTitle);
                                         
@@ -235,12 +236,11 @@ function displayCurrentConditions (data) {
 
     currentWeatherContent = document.createElement("div");
     currentWeatherContent.setAttribute('id',"weatherInfo");
-
-    
-    currentWeatherContent.append("Curent Date :" + dateString );
-
+   
+    //currentWeatherContent.append("Curent Date :" + dateString );
+   
     let h2 = document.createElement('h2');
-    h2.textContent = data.name;
+    h2.textContent = data.name + " - " + dateString ;
     currentWeatherContent.append(h2);
     h2.classList.add('weather');
 
@@ -249,7 +249,7 @@ function displayCurrentConditions (data) {
     currentWeatherContent.append(ul);
     ul.classList.add('weather');
     var li = document.createElement('li');
-    li.textContent = data.main.temp;
+    li.textContent = data.main.temp + "°F";
     currentWeatherContent.append(li);
     li.classList.add('weatherdata');
 
@@ -258,7 +258,7 @@ function displayCurrentConditions (data) {
     currentWeatherContent.append(ul);
     ul.classList.add('weather');
     var li = document.createElement('li');
-    li.textContent = data.main.feels_like;
+    li.textContent = data.main.feels_like + "°F";
     currentWeatherContent.append(li);
     li.classList.add('weatherdata');
 
@@ -267,27 +267,26 @@ function displayCurrentConditions (data) {
     currentWeatherContent.append(ul);
     ul.classList.add('weather');
     var li = document.createElement('li');
-    li.textContent = data.main.temp_max
+    li.textContent = data.main.temp_max + "°F";
     currentWeatherContent.append(li);
-
     li.classList.add('weatherdata');
+
     var ul = document.createElement('ul');
     ul.textContent = "Temp low :"
     currentWeatherContent.append(ul);
     ul.classList.add('weather');
     var li = document.createElement('li');
-    li.textContent = data.main.temp_min;
+    li.textContent = data.main.temp_min + "°F";
     currentWeatherContent.append(li);
-
     li.classList.add('weatherdata');
+
     var ul = document.createElement('ul');
     ul.textContent = "Wind speed: ";
     currentWeatherContent.append(ul);
     ul.classList.add('weather');
     var li = document.createElement('li');
-    li.textContent = data.wind.speed;
+    li.textContent = data.wind.speed + "MHP";
     currentWeatherContent.append(li);
-
     li.classList.add('weatherdata');
 
     currentWeather.appendChild(currentWeatherContent);
