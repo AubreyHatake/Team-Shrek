@@ -4,6 +4,9 @@ var latitude = 0;
 var longitude = 0;
 var currentWeather = document.querySelector('#current-weather');
 
+const date = new Date();
+var dateString = date.toLocaleDateString();
+
 //variables for national park
 var nationalParkApiKey ="wyMlD52aDKYO8sIZ8Ix3x8MlocAQp0VtIGjyGluu";
 var nationalParkSearchEl = $("#NPSearch");
@@ -50,12 +53,6 @@ var getNationalPark = function(inputStateIdEl)
         
         for(var i = 0; i < response.data.length; i++ )
         {
-
-        
-      
-      
-
-        
             NPInfo.push(response.data[i].fullName);
             console.log(NPInfo[i]);
             let npListLiEl = $("<li>").attr("class","NPLists").attr("id", "listOfNp");
@@ -69,17 +66,9 @@ var getNationalPark = function(inputStateIdEl)
     
 }    
 var stateIdArray = [];
-nationalParkSearchEl.on("click",function (event) {
+nationalParkSearchEl.on("click",function (event)
+ {
     
-    event.preventDefault(); 
-    var inputStateIdEl =$("#stateIdInput").val(); 
-    stateIdArray.push(inputStateIdEl); 
-    console.log(stateIdArray);
-    localStorage.setItem("stateIdInput", JSON.stringify(stateIdArray));
-
-
-    
-
     event.preventDefault();
     NPInfoConatinerEl.empty();
     var inputStateIdEl =$("#stateIdInput").val();
@@ -89,6 +78,7 @@ nationalParkSearchEl.on("click",function (event) {
    
     if(inputStateIdEl === "" || inputStateIdEl === undefined)
     {
+        
         alert("Please Enter valid statecode to display national parks");
     }
     else {
@@ -100,10 +90,12 @@ nationalParkSearchEl.on("click",function (event) {
 
 });
 
-function displayNpStateList() {
+function displayNpStateList()
+ {
     btnListEl.empty();
     var npStateIDList = JSON.parse(localStorage.getItem("stateIdInput")) || [];
-    for (let index = 0; index <  npStateIDList.length; index++) {
+    for (let index = 0; index <  npStateIDList.length; index++) 
+    {
         const element =  npStateIDList[index].toUpperCase();
         console.log(element);
         var li= $("<li>").attr("class","li-element").attr("id", "liOfStateId");
@@ -117,7 +109,8 @@ function displayNpStateList() {
         //btnListEl.append(li)
     }
 }
-function npListButton() {
+function npListButton() 
+{
     NPInfoConatinerEl.empty();
     var  element= $(this).text();
     console.log(element);
@@ -170,8 +163,7 @@ function parkSelection (event)
                     var npActivitiesTitle = $("<h2>").addClass("card-text ActivitiesTitle").text("Activities : ");
                     cardBody.append(npActivitiesTitle);
                     
-                    //var npActivitiesListUL = $("<ul>").addClass("card-text");
-                    //npActivities.append(npActivitiesListUL);
+                    
                     let npActivitiesList = [];
                     for(var j = 0; j < response.data[i].activities.length; j++ )
                     {
@@ -185,14 +177,17 @@ function parkSelection (event)
                     cardBody.append(weatherInfoTitle);
                     wetherDescription = $("<p>").addClass("card-text wetherdescriptionPara").text(response.data[i].weatherInfo);
                     cardBody.append(wetherDescription);
-                    var currentWeatherInfoEl = $("<button>").attr("type","button").attr("class","currentWeatherInfo").text("Current Weather Information");
-                    cardBody.append(currentWeatherInfoEl);
+                    //var currentWeatherInfoEl = $("<button>").attr("type","button").attr("class","currentWeatherInfo").text("Current Weather Information");
+                    //cardBody.append(currentWeatherInfoEl);
 
                     latitude = response.data[i].latitude;
                     longitude = response.data[i].longitude;
 
-                    currentWeatherInfoEl.on("click",getCurrentConditions(latitude, longitude));
+                    //currentWeatherInfoEl.on("click", 
+                    getCurrentConditions(latitude, longitude)
                     
+                        cardBody.append(currentWeather);
+
                      NPInfoConatinerEl.append(card);
 
 
@@ -201,30 +196,37 @@ function parkSelection (event)
         });
      
 }
+
+
 //local storage clears when page reloads
-function reset() {
+function reset()
+ {
     localStorage.clear();
-            }
+}
 window.onload = reset();
 
 
     
-
 var weatherEl = document.querySelector(".weather")
 
 
-var getCurrentConditions = (latitude, longitude) => {
+var getCurrentConditions = (latitude, longitude) => 
+{
     var weatherURL = "https://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&units=imperial" + "&appid=" + weatherApiKey
     fetch(weatherURL)
-    .then((response) => {
+    .then((response) => 
+    {
     console.log(response);
     return response.json();
-})
-.then(data => {
+    })
+    .then(data => 
+    {
     console.log("DATA: ", data)
-    displayCurrentConditions(data)
+   
+    displayCurrentConditions(data);
      return data;
-})}
+    });
+}
 
 
 function empty(element) {
@@ -236,14 +238,24 @@ function empty(element) {
 
 // this function is to display the city name, temp. the function is getting called on line 26, so that I can use the data from the getcurrentconditions function.
 function displayCurrentConditions (data) {
+    
     if (currentWeather.firstChild) {
+
+        //currentWeather.empty();
+        currentWeather.firstChild.remove();
+
         currentWeather.firstChild.empty();
+
     }
+    
+
+    currentWeather.append("Curent Date :" + dateString );
 
     let h2 = document.createElement('h2');
     h2.textContent = data.name;
     currentWeather.append(h2);
     h2.classList.add('weather');
+
     var ul = document.createElement('ul');
     ul.textContent = "Temp:"
     currentWeather.append(ul);
@@ -252,29 +264,33 @@ function displayCurrentConditions (data) {
     li.textContent = data.main.temp;
     currentWeather.append(li);
     li.classList.add('weatherdata');
+
     var ul = document.createElement('ul');
-    ul.textContent = "Feels like"
+    ul.textContent = "Feels like :"
     currentWeather.append(ul);
     ul.classList.add('weather');
     var li = document.createElement('li');
     li.textContent = data.main.feels_like;
     currentWeather.append(li);
     li.classList.add('weatherdata');
+
     var ul = document.createElement('ul');
-    ul.textContent = "Temp high"
+    ul.textContent = "Temp high :"
     currentWeather.append(ul);
     ul.classList.add('weather');
     var li = document.createElement('li');
     li.textContent = data.main.temp_max
     currentWeather.append(li);
+
     li.classList.add('weatherdata');
     var ul = document.createElement('ul');
-    ul.textContent = "Temp low"
+    ul.textContent = "Temp low :"
     currentWeather.append(ul);
     ul.classList.add('weather');
     var li = document.createElement('li');
     li.textContent = data.main.temp_min;
     currentWeather.append(li);
+
     li.classList.add('weatherdata');
     var ul = document.createElement('ul');
     ul.textContent = "Wind speed: ";
@@ -283,14 +299,8 @@ function displayCurrentConditions (data) {
     var li = document.createElement('li');
     li.textContent = data.wind.speed;
     currentWeather.append(li);
+
     li.classList.add('weatherdata');
     
-
 }
-   
-    
-
-
-
-
 
