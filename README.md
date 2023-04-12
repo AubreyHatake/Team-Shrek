@@ -1,20 +1,11 @@
 # Team-Shrek
 
-DEPLOYED SITE LINK WILL GO HERE: 
+DEPLOYED SITE LINK WILL GO HERE: https://shruthisalimath.github.io/Team-Shrek/
 
 ##  National Park Weather Check
     In this application the user is able to view the weather conditions of the curret day for the national parks that they are planing on going on.  
 
-## User Story 
-As a nature enthusiast, 
-I want to use an application that allows me to track the locations and weather conditions of national parks, so that I can plan my trips and enjoy the outdoors to the fullest.
 
-## Acceptance criteria 
- Given an application with the input form, 
-
-DEPLOYED SITE LINK WILL GO HERE:
-##  National Park Weather Check
-For this site the user is able to view the weather conditions for the national parks that they are planing on going on.
 ## User Story
 As a nature enthusiast,
 I want to use an application that allows me to track the locations and weather conditions of national parks, so that I can plan my trips and enjoy the outdoors to the fullest.
