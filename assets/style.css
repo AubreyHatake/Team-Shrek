@@ -15,9 +15,7 @@ h1 {
     width: 20%;
     background-color: whitesmoke;
 }*/
-.modal {
-    width :20%;
-}
+
 #NPSearch, #stateIdInput, #parklist {
   width:20%;
 }
@@ -142,3 +140,16 @@ p {
     width: 30%;
     list-style-type: none;
 }
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+
+    width: 300px;
+    max-width: 100%;
+    background-color: antiquewhite;
+    height: 200px;
+    max-height: 100%;
+
+  }
