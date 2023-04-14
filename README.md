@@ -31,7 +31,7 @@ I want to use an application that allows me to track the locations and weather c
   THEN I am presented with a responsive layout that adapts to my viewport.
 
   ## Screen Shot
-  [!National Park Weather](./assets/images/Screenshot-national-park.png)
+  ![National Park Weather](./assets/images/Screenshot-national-park.png)
 
   ## Discription of the Project: National park search with current day weather check
 
